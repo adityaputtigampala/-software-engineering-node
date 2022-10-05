@@ -2,13 +2,14 @@
  * @file Implements an Express Node HTTP server.
  */
 import express, {Request, Response} from 'express';
-//import mongoose from 'mongoose';
+import mongoose from 'mongoose';
+import db from './src/db/db';
 const cors = require('cors')
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-//mongoose.connect('mongodb://localhost:27017/FSD');
+db.on("error", console.error.bind(console, "MongoDB connection error."));
 
 app.get('/', (req: Request, res: Response) =>
     res.send('Welcome to Foundation of Software Engineering!!!!'));
