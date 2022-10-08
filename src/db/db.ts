@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+/**import mongoose from "mongoose";
 import {ConnectOptions} from "mongoose";
 
 let MONGODB_URI = 'mongodb://localhost:27017/FSD';
@@ -8,10 +8,10 @@ export interface MongoConnection{
     useNewUrlParser: boolean
 };
 
-mongoose.connect(MONGODB_URI, {MongoConnection: true , useNewUrlParser: true } as ConnectOptions).then(() => {
+mongoose.connect(MONGODB_URI, {useUnifiedTopology: true , useNewUrlParser: true } as ConnectOptions).then(() => {
 	console.log("Successfully connected to MongoDB.");
 });
 
 const db = mongoose.connection;
 
-export default db;
+export default db;*/
