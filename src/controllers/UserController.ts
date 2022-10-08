@@ -26,7 +26,8 @@ export default class UserController implements UserControllerI {
    deleteUser = (req: Request, res: Response) =>
        this.userDao.deleteUser(req.params.userid)
            .then(status => res.json(status));
-   updateUser = (req: Request, res: Response) =>
+   updateUser = (req: Request, res: Response) => {
+        console.log(req.params)
        this.userDao.updateUser(req.params.userid, req.body)
-           .then(status => res.json(status));
+           .then(status => res.json(status));}
 }
