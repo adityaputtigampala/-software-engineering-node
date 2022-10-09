@@ -44,19 +44,10 @@ async deleteUser(uid: string):  Promise<any> {
     return await UserModel.deleteOne({_id: uid});
 }
 async updateUser(uid: string, user: User): Promise<any> {
-    console.log(user, "user")
-    console.log(uid, "uid")
-    const id = uid
-    const updatingUser = await UserModel.findByIdAndUpdate(id, user, {new: true}, (error,updateUser)=>{
-        if(error){
-            return error
-        }
-        if(!updateUser) {
-            return "user not found"
-        }
-        return updateUser;
-    });
-    return updatingUser;
+    const updatingUser = await UserModel.findByIdAndUpdate(uid,user)
+    const newUpdateInfo  = await UserModel.findById(uid)
+    return newUpdateInfo
+    };
     // return await UserModel.updateOne({_id: uid}, {$set: {
     //         username: user.uName,
     //         password: user.pass,
@@ -64,6 +55,5 @@ async updateUser(uid: string, user: User): Promise<any> {
     //         lastName: user.lName,
     //         email: user.getEmail
     //     }});
-}
 }
 
