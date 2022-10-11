@@ -28,12 +28,16 @@ export default class TuitDao implements TuitDaoI {
     public async findAllTuits(): Promise<Tuit[]> {
     const tuitMongooseModels =
           await TuitModel.find();
+          console.log(tuitMongooseModels, 'tuitmongoosemodels')
     const tuitModels = tuitMongooseModels
       .map((tuitMongooseModel) => {
+        console.log(tuitMongooseModel, 'tuitmongoosemodel')
         return new Tuit(
           tuitMongooseModel?._id.toString() ?? '',
           tuitMongooseModel?.tuit ?? '',
-          new Date(tuitMongooseModel?.postedOn ?? (new Date())), tuitMongooseModel?.postedBy);
+          tuitMongooseModel?.postedOn ?? '',
+          tuitMongooseModel?.postedBy ?? '');
+          //new Date(tuitMongooseModel?.postedOn ?? (new Date())), tuitMongooseModel?.postedBy ?? '') ;
       })
     return tuitModels;
   }
@@ -62,12 +66,15 @@ export default class TuitDao implements TuitDaoI {
   }
 
     public async updateTuit(tuitId: string, tuit: Tuit): Promise<any> {
-    return TuitModel.updateOne(
-      {_id: tuitId},
-      {$set: {
-        tuit: tuit.tuit,
-        postedOn: tuit.postedOn,
-        postedBy: tuit.postedBy}})
+      const updatingTuit = await TuitModel.findByIdAndUpdate(tuitId, tuit)
+      const newTuit = await TuitModel.findById(tuitId)
+      return newTuit;
+    // return TuitModel.updateOne(
+    //   {_id: tuitId},
+    //   {$set: {
+    //     tuit: tuit.tuit,
+    //     postedOn: tuit.postedOn,
+    //     postedBy: tuit.postedBy}})
   }
   }
   
