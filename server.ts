@@ -7,6 +7,9 @@ import UserDao from './src/daos/UserDao';
 import TuitController from './src/controllers/TuitController';
 import TuitDao from './src/daos/TuitDao';
 import UserController from './src/controllers/UserController';
+import followsController from './src/controllers/FollowController';
+import FollowController from './src/controllers/FollowController';
+import FollowDao from './src/daos/FollowDao';
 
 //import db from './src/db/db';
 const cors = require('cors')
@@ -45,3 +48,4 @@ app.listen(process.env.PORT || PORT);
 
 const userController = new UserController(app, new UserDao());
 const tuitController = new TuitController(app, new TuitDao());
+const followController = new FollowController(app, new FollowDao());
