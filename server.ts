@@ -10,6 +10,10 @@ import UserController from './src/controllers/UserController';
 import followsController from './src/controllers/FollowController';
 import FollowController from './src/controllers/FollowController';
 import FollowDao from './src/daos/FollowDao';
+import BookmarkController from './src/controllers/BookmarkController';
+import BookmarkDao from './src/daos/BookmarkDao';
+import MessageController from './src/controllers/MessageController';
+import MessageDao from './src/daos/MessageDao';
 
 //import db from './src/db/db';
 const cors = require('cors')
@@ -49,3 +53,5 @@ app.listen(process.env.PORT || PORT);
 const userController = new UserController(app, new UserDao());
 const tuitController = new TuitController(app, new TuitDao());
 const followController = new FollowController(app, new FollowDao());
+const bookmarkController = new BookmarkController(app, new BookmarkDao());
+const messageController = new MessageController(app, new MessageDao());
