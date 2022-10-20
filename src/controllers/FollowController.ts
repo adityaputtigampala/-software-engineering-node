@@ -9,10 +9,12 @@ export default class FollowController implements FollowControllerI {
   constructor(app: Express, followDao: FollowDao) { 
       this.app = app;
       this.followDao = followDao;
-      this.app.post('/api/users/:follower/follows/:followed', this.userFollowsUser);
-      this.app.delete('/api/users/:follower/follows/:followed', this.userUnfollowsUser);
-      this.app.get('/api/users/:me/following', this.findWhoIamFollowing);
-      this.app.get('/api/users/:who/following', this.findWhoIsFollowingMe);
+      this.app.post('/users/:follower/follows/:followed', this.userFollowsUser);
+      this.app.delete('/users/:follower/follows/:followed', this.userUnfollowsUser);
+      this.app.get('/users/:me/following', this.findWhoIamFollowing);
+      this.app.get('/users/:who/following', this.findWhoIsFollowingMe);
+      this.app.get('/users/:me/following/count', this.findWhoIamFollowingCount);
+      this.app.get('/users/:who/following/count', this.findWhoIsFollowingMeCount);
       
       
       
@@ -39,12 +41,24 @@ export default class FollowController implements FollowControllerI {
 findWhoIamFollowing = async(req: Request, res: Response) => {
   const me = req.params.followed;
   const who = await this.followDao.findWhoIsFollowingMe(me);
-  res.json(me);
+  res.json(who);
 }
 
  findWhoIsFollowingMe = async(req: Request, res: Response) => {
     const me = req.params.followed;
     const who = await this.followDao.findWhoIsFollowingMe(me);
     res.json(who);
+}
+
+findWhoIamFollowingCount = async(req: Request, res: Response) => {
+  const me = req.params.followed;
+  const who = await this.followDao.findWhoIsFollowingMe(me);
+  res.json(who);
+}
+
+findWhoIsFollowingMeCount = async(req: Request, res: Response) => {
+  const me = req.params.followed;
+  const who = await this.followDao.findWhoIsFollowingMe(me);
+  res.json(who);
 }
 }

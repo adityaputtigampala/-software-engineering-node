@@ -41,6 +41,20 @@ export default class FollowDao implements FollowDaoI {
     return who;
 }
 
+public findWhoIamFollowingCount =async (me: string) => {
+    const who = await FollowModel
+    .find({follower: me})
+    .count();
+    return who;
+}
+
+public findWhoIsFollowingMeCount =async (me: string) => {
+    const who = await FollowModel
+    .find({followed: me})
+    .count();
+    return who;
+}
+
 //TODO: 1). Put in a class
 //TODO: 2) implement singleton pattern
 //TODO: 3). map to higher level classes 

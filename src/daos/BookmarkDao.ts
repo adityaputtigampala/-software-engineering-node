@@ -23,6 +23,7 @@ export default class BookmarkDao implements BookmarkDaoI {
         return bookmarked;
     }
 
+    
     public userUnbookmarksTuit = async (
         uid: string, tid: string) => {
         const bookmarked = await BookmarkModel.deleteOne({
@@ -43,6 +44,6 @@ export default class BookmarkDao implements BookmarkDaoI {
 
 //TODO: 1). Put in a class
 //TODO: 2) implement singleton pattern
-//TODO: 3). map to higher level classes 
+//TODO: 3). map to higher level classes
 
 }

@@ -5,5 +5,7 @@ export default interface FollowDao {
     userUnfollowsUser(follower: string, followed: string): Promise<any>;
     findWhoIamFollowing(me: string): Promise<any>;
     findWhoIsFollowingMe(me: string): Promise<any>;
+    findWhoIamFollowingCount(me: string): Promise<any>;
+    findWhoIsFollowingMeCount(me: string): Promise<any>;
 
 }
