@@ -17,12 +17,12 @@ export default class MessageDao implements MessageDaoI {
     public constructor() {}
 
     public userMessagesUser = async(
-    uidTo: string, uidFrom: string, message: Message) => {
+    uidTo: string, uidFrom: string, message: any) => {
         const msg = await MessageModel.create({
-            Message,
-            uidTo,
-            uidFrom,
-            sentOn: Date.now(),
+            message: message.message,
+            to: uidTo,
+            from: uidFrom,
+            sentOn: new Date(),
         });
         return msg;
     }

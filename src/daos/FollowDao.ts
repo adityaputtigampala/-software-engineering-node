@@ -2,6 +2,7 @@ import FollowModel from "../mongoose/FollowModel";
 import UserModel from "../mongoose/UserModel"
 import FollowControllerI from "../interfaces/FollowController";
 import FollowDaoI from "../interfaces/FollowDao";
+import Follow from "../Models/Follow";
 
 export default class FollowDao implements FollowDaoI {
     public static FollowDao: FollowDao | null = null;
@@ -29,6 +30,7 @@ export default class FollowDao implements FollowDaoI {
     };
 
     public findWhoIamFollowing =async (me: string) => {
+    console.log(me, "checking")
     const who = await FollowModel.find({follower: me});
     return who;
 }
@@ -51,7 +53,7 @@ public findWhoIamFollowingCount =async (me: string) => {
 public findWhoIsFollowingMeCount =async (me: string) => {
     const who = await FollowModel
     .find({followed: me})
-    .count();
+    .count()
     return who;
 }
 
