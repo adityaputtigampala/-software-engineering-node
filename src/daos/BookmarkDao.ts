@@ -14,8 +14,9 @@ export default class BookmarkDao implements BookmarkDaoI {
     }
     public constructor() {}
 
-    public userBookmarksTuit = async(
+    public userBookmarksTuit = async( 
     uid: string, tid: string) => {
+        console.log(uid, "uid")
         const bookmarked = await BookmarkModel.create({
             bookmarkedTuit: tid,
             bookmarkedBy: uid,
@@ -40,6 +41,15 @@ export default class BookmarkDao implements BookmarkDaoI {
         .populate("bookmarkedTuit")
         .exec();
         return bookmarked;
+}
+
+public findAllTuitsBookmarkedByUserCount =async (
+    uid: string) => {
+    const bookmarked = await BookmarkModel
+    .find({bookmarkedBy: uid})
+    .populate("bookmarkedTuit")
+    .count()
+    return bookmarked;
 }
 
 //TODO: 1). Put in a class

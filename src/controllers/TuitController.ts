@@ -1,3 +1,6 @@
+/**
+ * @file Controller RESTful Web service API for Tuit resource
+ */
 import {Express, Request, Response} from "express";
 import TuitDao from "../daos/TuitDao";
 import TuitControllerI from "../interfaces/TuitController";

@@ -1,3 +1,6 @@
+/**
+ * @file Controller RESTful Web service API for Follow resource
+ */
 import {Express, Request, Response} from "express";
 import { request } from "http";
 import FollowDao, * as followsDao from "../daos/FollowDao";

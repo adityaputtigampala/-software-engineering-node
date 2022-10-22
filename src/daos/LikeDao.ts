@@ -15,7 +15,7 @@ export default class LikeDao implements LikeDaoI {
     public constructor() {}
 
     public userLikesTuit = async(
-    uid: string, tid: string) => {
+        tid: string, uid: string) => {
         const liked = await LikeModel.create({
             tuit: tid,
             likedBy: uid,
@@ -25,7 +25,7 @@ export default class LikeDao implements LikeDaoI {
 
     
     public userUnlikesTuit = async (
-        uid: string, tid: string) => {
+        tid: string, uid: string) => {
         const liked = await LikeModel.deleteOne({
             tuit: tid,
             likedBy: uid,

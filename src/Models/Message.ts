@@ -8,7 +8,7 @@ export default class Message {
     private from: string;
     private sentOn: Date;
  
- 
+
     constructor(id: string, message: string, to: string,from: string, sentOn: Date ) {
             this.id = id;
             this.message = message;

@@ -33,9 +33,25 @@ export default class MessageDao implements MessageDaoI {
         return msg;
     };
 
+    public findAllMessagesSentByUserCount = async (
+        uid: string) => {
+            const msg = await MessageModel
+            .find({from: uid})
+            .count();
+            return msg;
+        };
+
     public findAllMessagesReceivedByUser =async (
     uid: string) => {
     const msg = await MessageModel.find({to: uid});
+    return msg;
+}
+
+    public findAllMessagesReceivedByUserCount =async (
+    uid: string) => {
+    const msg = await MessageModel
+    .find({to: uid})
+    .count();
     return msg;
 }
 

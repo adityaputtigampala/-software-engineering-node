@@ -1,5 +1,8 @@
+/**
+ * @file Controller RESTful Web service API for Like resource
+ */
 import {Express, Request, Response} from "express";
-import LikeDao, * as followsDao from "../daos/LikeDao";
+import LikeDao from "../daos/LikeDao";
 import LikeControllerI from "../interfaces/LikeController";
 
 export default class LikeController implements LikeControllerI {
@@ -18,7 +21,7 @@ export default class LikeController implements LikeControllerI {
 
   userLikesTuit = async (req: Request, res: Response) => {
     this.likeDao.userLikesTuit(
-      req.params.uid, req.params.tid)
+      req.params.tid, req.params.uid)
       .then(likes=>res.json(likes)
       );
     
@@ -27,7 +30,7 @@ export default class LikeController implements LikeControllerI {
 userUnlikesTuit = async (req: Request, res: Response) => {
     
     this.likeDao.userUnlikesTuit(
-        req.params.uid, req.params.tid)
+        req.params.tid, req.params.uid)
         .then(likes=>res.json(likes)
     );
   

@@ -5,5 +5,6 @@ export default interface BookmarkDao {
     userBookmarksTuit(tid: string, uid: string): Promise<any>;
     userUnbookmarksTuit(tid: string, uid: string): Promise<any>;
     findAllTuitsBookmarkedByUser(uid: string): Promise<any>;
+    findAllTuitsBookmarkedByUserCount(uid: string): Promise<any>;
 
 }

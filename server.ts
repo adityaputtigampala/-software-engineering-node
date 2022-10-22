@@ -45,7 +45,8 @@ app.get('/hello', (req: Request, res: Response) =>
     family: 4
   }
   //const mongoose = require('mongoose');
-  mongoose.connect('mongodb://localhost:27017/FSD', options);
+  //mongoose.connect('mongodb://localhost:27017/FSD', options);
+  mongoose.connect("mongodb+srv://aputtigampala:Federer3701!@cluster0.j2vn9lt.mongodb.net/?retryWrites=true&w=majority", options)
 
 const PORT = 4000;
 app.listen(process.env.PORT || PORT);
