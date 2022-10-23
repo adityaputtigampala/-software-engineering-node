@@ -17,7 +17,7 @@ export default class MessageDao implements MessageDaoI {
     public constructor() {}
 
     public userMessagesUser = async(
-    uidTo: string, uidFrom: string, message: any) => {
+    uidTo: string, uidFrom: string, message: any): Promise<any> => {
         const msg = await MessageModel.create({
             message: message.message,
             to: uidTo,
@@ -28,13 +28,13 @@ export default class MessageDao implements MessageDaoI {
     }
 
     public findAllMessagesSentByUser = async (
-    uid: string) => {
+    uid: string): Promise<any> => {
         const msg = await MessageModel.find({from: uid});
         return msg;
     };
 
     public findAllMessagesSentByUserCount = async (
-        uid: string) => {
+        uid: string): Promise<any> => {
             const msg = await MessageModel
             .find({from: uid})
             .count();
@@ -42,13 +42,13 @@ export default class MessageDao implements MessageDaoI {
         };
 
     public findAllMessagesReceivedByUser =async (
-    uid: string) => {
+    uid: string): Promise<any> => {
     const msg = await MessageModel.find({to: uid});
     return msg;
 }
 
     public findAllMessagesReceivedByUserCount =async (
-    uid: string) => {
+    uid: string): Promise<any> => {
     const msg = await MessageModel
     .find({to: uid})
     .count();
@@ -56,14 +56,10 @@ export default class MessageDao implements MessageDaoI {
 }
 
     public userdeletesMessage = async(
-        uid: string, message: Message) => {
+        uid: string, message: Message): Promise<any> => {
     const msg = await MessageModel
     .deleteOne({_id: Message})
     return msg;
 }
-
-//TODO: 1). Put in a class
-//TODO: 2) implement singleton pattern
-//TODO: 3). map to higher level classes 
 
 }

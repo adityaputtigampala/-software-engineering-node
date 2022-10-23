@@ -69,12 +69,7 @@ export default class TuitDao implements TuitDaoI {
       const updatingTuit = await TuitModel.findByIdAndUpdate(tuitId, tuit)
       const newTuit = await TuitModel.findById(tuitId)
       return newTuit;
-    // return TuitModel.updateOne(
-    //   {_id: tuitId},
-    //   {$set: {
-    //     tuit: tuit.tuit,
-    //     postedOn: tuit.postedOn,
-    //     postedBy: tuit.postedBy}})
+
   }
   }
   

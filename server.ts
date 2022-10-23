@@ -14,9 +14,12 @@ import BookmarkController from './src/controllers/BookmarkController';
 import BookmarkDao from './src/daos/BookmarkDao';
 import MessageController from './src/controllers/MessageController';
 import MessageDao from './src/daos/MessageDao';
+import LikeController from './src/controllers/LikeController';
+import LikeDao from './src/daos/LikeDao';
 
 //import db from './src/db/db';
 const cors = require('cors')
+require("dotenv").config();
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -46,7 +49,9 @@ app.get('/hello', (req: Request, res: Response) =>
   }
   //const mongoose = require('mongoose');
   //mongoose.connect('mongodb://localhost:27017/FSD', options);
-  mongoose.connect("mongodb+srv://aputtigampala:Federer3701!@cluster0.j2vn9lt.mongodb.net/?retryWrites=true&w=majority", options)
+  
+  const url:string | any = process.env.MONGOURL
+  mongoose.connect(url, options)
 
 const PORT = 4000;
 app.listen(process.env.PORT || PORT);
@@ -56,3 +61,4 @@ const tuitController = new TuitController(app, new TuitDao());
 const followController = new FollowController(app, new FollowDao());
 const bookmarkController = new BookmarkController(app, new BookmarkDao());
 const messageController = new MessageController(app, new MessageDao());
+const likeController = new LikeController(app, new LikeDao());

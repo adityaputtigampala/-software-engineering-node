@@ -3,6 +3,7 @@ import UserModel from "../mongoose/UserModel"
 import FollowControllerI from "../interfaces/FollowController";
 import FollowDaoI from "../interfaces/FollowDao";
 import Follow from "../Models/Follow";
+import User from "../Models/User";
 
 export default class FollowDao implements FollowDaoI {
     public static FollowDao: FollowDao | null = null;
@@ -15,7 +16,7 @@ export default class FollowDao implements FollowDaoI {
     public constructor() {}
 
     public userFollowsUser = async(
-    follower: string, followed: string) => {
+    follower: string, followed: string): Promise<any> => {
         const follows = await FollowModel.create({
             follower,
             followed,
@@ -24,22 +25,34 @@ export default class FollowDao implements FollowDaoI {
     }
 
     public userUnfollowsUser = async (
-    follower: string, followed: string) => {
+    follower: string, followed: string): Promise<any> => {
         const status = await FollowModel.deleteOne({follower, followed});
         return status;
     };
 
-    public findWhoIamFollowing =async (me: string) => {
-    console.log(me, "checking")
-    const who = await FollowModel.find({follower: me});
+    findWhoIamFollowing =async (me: string): Promise<any> => {
+    const who = await FollowModel
+    .find({follower: me})
+    .populate("follower", "followed")
+    .exec();
     return who;
 }
 
-    public findWhoIsFollowingMe = async(me: string) => {
+    findWhoIsFollowingMe = async(me: string): Promise<any> => {
+    
+    //.exec();
+    const userMongooseModel = await UserModel.findById(me);
+    const user1 = new User(
+        userMongooseModel?._id.toString()??'',
+                    userMongooseModel?.username??'',
+                    userMongooseModel?.password??'',
+                    userMongooseModel?.firstName??'',
+                    userMongooseModel?.lastName??'',
+                    userMongooseModel?.email??''
+    );
     const who = await FollowModel
     .find({followed: me})
-    .populate('follower', 'username')
-    .exec()
+    .populate('follower', 'followed', 'user1')
     return who;
 }
 
@@ -56,9 +69,5 @@ public findWhoIsFollowingMeCount =async (me: string) => {
     .count()
     return who;
 }
-
-//TODO: 1). Put in a class
-//TODO: 2) implement singleton pattern
-//TODO: 3). map to higher level classes 
 
 }

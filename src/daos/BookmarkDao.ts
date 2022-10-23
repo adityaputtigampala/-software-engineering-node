@@ -3,6 +3,7 @@ import UserModel from "../mongoose/UserModel"
 import BookmarkControllerI from "../interfaces/BookmarkController";
 import BookmarkDaoI from "../interfaces/BookmarkDao";
 import BookmarkModel from "../mongoose/BookmarkModel";
+import Bookmark from "../Models/Bookmark";
 
 export default class BookmarkDao implements BookmarkDaoI {
     public static BookmarkDao: BookmarkDao | null = null;
@@ -15,7 +16,7 @@ export default class BookmarkDao implements BookmarkDaoI {
     public constructor() {}
 
     public userBookmarksTuit = async( 
-    uid: string, tid: string) => {
+    uid: string, tid: string): Promise<any> => {
         console.log(uid, "uid")
         const bookmarked = await BookmarkModel.create({
             bookmarkedTuit: tid,
@@ -35,7 +36,7 @@ export default class BookmarkDao implements BookmarkDaoI {
     };
 
     public findAllTuitsBookmarkedByUser =async (
-        uid: string) => {
+        uid: string): Promise<any> => {
         const bookmarked = await BookmarkModel
         .find({bookmarkedBy: uid})
         .populate("bookmarkedTuit")
@@ -52,8 +53,5 @@ public findAllTuitsBookmarkedByUserCount =async (
     return bookmarked;
 }
 
-//TODO: 1). Put in a class
-//TODO: 2) implement singleton pattern
-//TODO: 3). map to higher level classes
 
 }

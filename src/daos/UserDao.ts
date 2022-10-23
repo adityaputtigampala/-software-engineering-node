@@ -48,12 +48,6 @@ async updateUser(uid: string, user: User): Promise<any> {
     const newUpdateInfo  = await UserModel.findById(uid)
     return newUpdateInfo
     };
-    // return await UserModel.updateOne({_id: uid}, {$set: {
-    //         username: user.uName,
-    //         password: user.pass,
-    //         firstName: user.fName,
-    //         lastName: user.lName,
-    //         email: user.getEmail
-    //     }});
+   
 }
 

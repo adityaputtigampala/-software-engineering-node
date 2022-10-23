@@ -1,25 +1,25 @@
 import User from "./User";
 
 export default class Follow {
-    private follower: string;
-    private followed: string;
+    public follower: User;
+    public followed: User;
  
  
-    constructor(follower: string, followed: string) {
+    constructor(follower: User, followed: User) {
             this.follower = follower;
             this.followed = followed;
     }
     get getuserFollowed() {
         return this.follower;
     }
-    set setuserFollowed(value: string) {
+    set setuserFollowed(value: User) {
         this.follower = value;
     }
 
     get getuserFollowing() {
         return this.followed;
     }
-    set setuserFollowing(value: string) {
+    set setuserFollowing(value: User) {
         this.followed = value;
     }
  }
