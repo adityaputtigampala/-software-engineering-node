@@ -4,6 +4,7 @@ import BookmarkControllerI from "../interfaces/BookmarkController";
 import LikeDaoI from "../interfaces/LikeDao";
 import LikeModel from "../mongoose/LikeModel";
 import TuitModel from "../mongoose/TuitModel";
+import Like from "../Models/Like";
 
 export default class LikeDao implements LikeDaoI {
     public static LikeDao: LikeDao | null = null;
@@ -23,8 +24,6 @@ export default class LikeDao implements LikeDaoI {
         });
         const username = await UserModel.findById(uid)
         const tuit = await TuitModel.findById(tid)
-        console.log(username, "uname")
-        console.log(tuit, "tuit")
         const response = {
             _id:liked.id,
             likedBy: username?.username,
@@ -45,7 +44,6 @@ export default class LikeDao implements LikeDaoI {
 
     public findAllUsersWhoLikedTuit =async (
         tid: string) => {
-        console.log(tid, "tid")
         const liked = await LikeModel
         .find({tuit: tid})
         .populate("likedBy")

@@ -30,7 +30,7 @@ export default class LikeController implements LikeControllerI {
       this.app.post('/users/:uid/likes/:tid', this.userLikesTuit);
       this.app.delete('/users/:uid/likes/:tid', this.userUnlikesTuit);
       this.app.get('/users/:tid/likes', this.findAllUsersWhoLikedTuit);
-      this.app.get('/users/:uid/likes', this.findAllTuitsLikedByUser);
+      this.app.get('/users/:uid/likesByUser', this.findAllTuitsLikedByUser);
       
   }
 

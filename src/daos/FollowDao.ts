@@ -42,17 +42,9 @@ export default class FollowDao implements FollowDaoI {
     
     //.exec();
     const userMongooseModel = await UserModel.findById(me);
-    const user1 = new User(
-        userMongooseModel?._id.toString()??'',
-                    userMongooseModel?.username??'',
-                    userMongooseModel?.password??'',
-                    userMongooseModel?.firstName??'',
-                    userMongooseModel?.lastName??'',
-                    userMongooseModel?.email??''
-    );
     const who = await FollowModel
     .find({followed: me})
-    .populate('follower', 'followed', 'user1')
+    .populate('follower', 'followed')
     return who;
 }
 
