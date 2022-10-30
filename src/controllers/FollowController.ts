@@ -7,7 +7,7 @@ import FollowDao, * as followsDao from "../daos/FollowDao";
 import FollowControllerI from "../interfaces/FollowController";
 
 /**
- * @class BookmarkController Implements RESTful Web service API for follow resource.
+ * @class FollowController Implements RESTful Web service API for follow resource.
  * Defines the following HTTP endpoints:
  * <ul>
  *     <li>POST /users/:follower/follows/:followed to record that a user follows another user

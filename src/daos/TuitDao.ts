@@ -28,7 +28,7 @@ export default class TuitDao implements TuitDaoI {
     public async findAllTuits(): Promise<Tuit[]> {
     const tuitMongooseModels =
           await TuitModel.find();
-          console.log(tuitMongooseModels, 'tuitmongoosemodels')
+
     const tuitModels = tuitMongooseModels
       .map((tuitMongooseModel) => {
         console.log(tuitMongooseModel, 'tuitmongoosemodel')
@@ -37,7 +37,6 @@ export default class TuitDao implements TuitDaoI {
           tuitMongooseModel?.tuit ?? '',
           tuitMongooseModel?.postedOn ?? '',
           tuitMongooseModel?.postedBy ?? '');
-          //new Date(tuitMongooseModel?.postedOn ?? (new Date())), tuitMongooseModel?.postedBy ?? '') ;
       })
     return tuitModels;
   }

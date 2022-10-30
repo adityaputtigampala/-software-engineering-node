@@ -6,17 +6,19 @@ import LikeDao from "../daos/LikeDao";
 import LikeControllerI from "../interfaces/LikeController";
 
 /**
- * @class BookmarkController Implements RESTful Web service API for bookmarks resource.
+ * @class LikeController Implements RESTful Web service API for likes resource.
  * Defines the following HTTP endpoints:
  * <ul>
- *     <li>POST /users/:uid/bookmarks/:tid to record that a user bookmarks a tuit
+ *     <li>POST /users/:uid/likes/:tid to record that a user likes a tuit
  *     </li>
- *     <li>DELETE /users/:uid/bookmarks/:tid to delete all a tuit bookmarked by a user
+ *     <li>DELETE /users/:uid/likes/:tid to delete all a tuit liked by a user
  *     </li> 
- *     <li>GET /users/:uid/bookmarks to get all tuits bookmarked by a user</li>
+ *     <li>GET /users/:tid/likes to get all the users who like a tuit
+ *     </li> 
+ *     <li>GET /users/:uid/likesByUser to get all tuits liked by a user</li>
  * </ul>
  * @property {app} Express Express implementation of the application
- * @property {bookmarkDao} BookmarkDao Bookmark DAO implementing
+ * @property {likeDao} likeDao like DAO implementing
  * RESTful Web service API
  */
 
@@ -34,6 +36,11 @@ export default class LikeController implements LikeControllerI {
       
   }
 
+  /**
+    * Action performed to find a user who likes a tuit 
+    * @param req Represents request from client, including the path parameters me
+    * @param res Represents response to client, including a created like object
+    */
   userLikesTuit = async (req: Request, res: Response) => {
     this.likeDao.userLikesTuit(
       req.params.tid, req.params.uid)
@@ -42,6 +49,11 @@ export default class LikeController implements LikeControllerI {
     
 }
 
+/**
+    * Action performed to find a user who unlikes a tuit 
+    * @param req Represents request from client, including the path parameters user id
+    * @param res Represents response to client, including a created like object
+    */
 userUnlikesTuit = async (req: Request, res: Response) => {
     
     this.likeDao.userUnlikesTuit(
@@ -50,13 +62,22 @@ userUnlikesTuit = async (req: Request, res: Response) => {
     );
   
 }
-
+/**
+    * Action performed to find all users who like a tuit 
+    * @param req Represents request from client, including the path parameters tuid id
+    * @param res Represents response to client, including a created like object
+    */
 findAllUsersWhoLikedTuit = async(req: Request, res: Response) => {
   this.likeDao.findAllUsersWhoLikedTuit(req.params.tid)
   .then(likes=>res.json(likes)
   );
 }
 
+/**
+    * Action performed to find all tuits like by a user 
+    * @param req Represents request from client, including the path parameters user id
+    * @param res Represents response to client, including a created like object
+    */
 findAllTuitsLikedByUser = async(req: Request, res: Response) => {
     this.likeDao.findAllTuitsLikedByUser(req.params.uid)
     .then(likes=>res.json(likes)
