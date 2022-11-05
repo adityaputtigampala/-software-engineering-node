@@ -31,12 +31,12 @@ export default class MessageController implements MessageControllerI {
    constructor(app: Express, messageDao: MessageDao) {
        this.app = app;
        this.messageDao = messageDao;
-       this.app.post('/users/:uidTo/messages/sent/:uidFrom', this.userMessagesUser);
-       this.app.delete('/users/:uid/messages/sent/:message', this.userdeletesMessage);
-       this.app.get('/users/:uid/messages/sent', this.findAllMessagesSentByUser);
-       this.app.get('/users/:uid/messages/received', this.findAllMessagesReceivedByUser);
-       this.app.get('/users/:uid/messagecount/sent', this.findAllMessagesSentByUserCount);
-       this.app.get('/users/:uid/messagescount/received', this.findAllMessagesReceivedByUserCount);
+       this.app.post('/api/users/:uidTo/messages/sent/:uidFrom', this.userMessagesUser);
+       this.app.delete('/api/users/:uid/messages/sent/:message', this.userdeletesMessage);
+       this.app.get('/api/users/:uid/messages/sent', this.findAllMessagesSentByUser);
+       this.app.get('/api/users/:uid/messages/received', this.findAllMessagesReceivedByUser);
+       this.app.get('/api/users/:uid/messagecount/sent', this.findAllMessagesSentByUserCount);
+       this.app.get('/api/users/:uid/messagescount/received', this.findAllMessagesReceivedByUserCount);
    }
 
    /**

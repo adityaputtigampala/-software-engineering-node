@@ -33,10 +33,10 @@ export default class BookmarkController implements BookmarkControllerI {
        this.app = app;
        this.bookmarkDao = bookmarkDao;
        
-       this.app.post('/users/:uid/bookmarks/:tid', this.userBookmarksTuit);
-       this.app.delete('/users/:uid/bookmarks/:tid', this.userUnbookmarksTuit);
-       this.app.get('/users/:uid/bookmarks', this.findAllTuitsBookmarkedByUser);
-       this.app.get('/users/:uid/bookmarknum/count', this.findAllTuitsBookmarkedByUserCount);
+       this.app.post('/api/users/:uid/bookmarks/:tid', this.userBookmarksTuit);
+       this.app.delete('/api/users/:uid/bookmarks/:tid', this.userUnbookmarksTuit);
+       this.app.get('/api/users/:uid/bookmarks', this.findAllTuitsBookmarkedByUser);
+       this.app.get('/api/users/:uid/bookmarknum/count', this.findAllTuitsBookmarkedByUserCount);
    }
    /**
     * Action performed when a user bookmarks a Tuit 

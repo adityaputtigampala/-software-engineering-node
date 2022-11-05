@@ -39,12 +39,12 @@ export default class FollowController implements FollowControllerI {
   constructor(app: Express, followDao: FollowDao) { 
       this.app = app;
       this.followDao = followDao;
-      this.app.post('/users/:follower/follows/:followed', this.userFollowsUser);
-      this.app.delete('/users/:follower/follows/:followed', this.userUnfollowsUser);
-      this.app.get('/users/:me/following', this.findWhoIamFollowing);
-      this.app.get('/users/:who/following', this.findWhoIsFollowingMe);
-      this.app.get('/users/:me/following/count', this.findWhoIamFollowingCount);
-      this.app.get('/users/:who/follower/count', this.findWhoIsFollowingMeCount);
+      this.app.post('/api/users/:follower/follows/:followed', this.userFollowsUser);
+      this.app.delete('/api/users/:follower/follows/:followed', this.userUnfollowsUser);
+      this.app.get('/api/users/:me/following', this.findWhoIamFollowing);
+      this.app.get('/api/users/:who/following', this.findWhoIsFollowingMe);
+      this.app.get('/api/users/:me/following/count', this.findWhoIamFollowingCount);
+      this.app.get('/api/users/:who/follower/count', this.findWhoIsFollowingMeCount);
       
       
       
