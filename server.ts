@@ -7,9 +7,19 @@ import UserDao from './src/daos/UserDao';
 import TuitController from './src/controllers/TuitController';
 import TuitDao from './src/daos/TuitDao';
 import UserController from './src/controllers/UserController';
+import followsController from './src/controllers/FollowController';
+import FollowController from './src/controllers/FollowController';
+import FollowDao from './src/daos/FollowDao';
+import BookmarkController from './src/controllers/BookmarkController';
+import BookmarkDao from './src/daos/BookmarkDao';
+import MessageController from './src/controllers/MessageController';
+import MessageDao from './src/daos/MessageDao';
+import LikeController from './src/controllers/LikeController';
+import LikeDao from './src/daos/LikeDao';
 
 //import db from './src/db/db';
 const cors = require('cors')
+require("dotenv").config();
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -38,10 +48,17 @@ app.get('/hello', (req: Request, res: Response) =>
     family: 4
   }
   //const mongoose = require('mongoose');
-  mongoose.connect('mongodb://localhost:27017/FSD', options);
+  //mongoose.connect('mongodb://localhost:27017/FSD', options);
+  
+  const url:string | any = process.env.MONGOURL
+  mongoose.connect(url, options)
 
 const PORT = 4000;
 app.listen(process.env.PORT || PORT);
 
 const userController = new UserController(app, new UserDao());
 const tuitController = new TuitController(app, new TuitDao());
+const followController = new FollowController(app, new FollowDao());
+const bookmarkController = new BookmarkController(app, new BookmarkDao());
+const messageController = new MessageController(app, new MessageDao());
+const likeController = new LikeController(app, new LikeDao());
