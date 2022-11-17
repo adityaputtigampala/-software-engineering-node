@@ -54,6 +54,7 @@ export default class TuitDao implements TuitDaoI {
 }
     public async createTuit(tuit: Tuit): Promise<Tuit> {
     const tuitMongooseModel = await TuitModel.create(tuit);
+    console.log(tuit, 'Tuit')
     return new Tuit(
       tuitMongooseModel?._id.toString() ?? '',
       tuitMongooseModel.tuit,
