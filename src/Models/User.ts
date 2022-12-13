@@ -4,8 +4,8 @@ import Location from "./Location";
 
 export default class User {
     private id: string = '';
-    private username: string = '';
-    private password: string = '';
+    public username: string = '';
+    public password: string = '';
     private firstName: string | null = null;
     private lastName: string | null = null;
     private email: string = '';

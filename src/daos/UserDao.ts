@@ -3,6 +3,9 @@ import UserModel from "../mongoose/UserModel";
 import UserDaoI from "../interfaces/UserDao";
 
 export default class UserDao implements UserDaoI {
+  static getInstance(): UserDao {
+    throw new Error("Method not implemented.");
+  }
    async findAllUsers(): Promise<User[]> {
        const userMongooseModels = await UserModel.find();
        const userModels = userMongooseModels
@@ -29,6 +32,12 @@ export default class UserDao implements UserDaoI {
                     userMongooseModel?.email??''
     );
 }
+
+async findUserByUsername(username: string): Promise<any> {
+const userMongooseModel = await UserModel.findOne({username});
+}
+
+
 async createUser(user: User): Promise<User> {
     const userMongooseModel = await UserModel.create(user);
     return new User(
