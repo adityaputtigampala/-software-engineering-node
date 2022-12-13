@@ -55,10 +55,16 @@ public findAllTuitsLikedByUser =async (
     uid: string) => {
     const liked = await LikeModel
     .find({likedBy: uid})
-    .populate("tuit")
+    .populate({
+        path: "tuit",
+        populate: {
+            path: "postedBy"
+        }
+        })
     .exec();
     return liked;
 }
+
 public countHowManyLikedTuit =
   async (tid: string) =>
     LikeModel.count({tuit: tid});
