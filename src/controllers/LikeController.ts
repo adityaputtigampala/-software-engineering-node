@@ -4,6 +4,8 @@
 import {Express, Request, Response} from "express";
 import LikeDao from "../daos/LikeDao";
 import LikeControllerI from "../interfaces/LikeController";
+import TuitDao from "../daos/TuitDao";
+import TuitControllerI from "../interfaces/TuitController";
 
 /**
  * @class LikeController Implements RESTful Web service API for likes resource.
@@ -25,10 +27,12 @@ import LikeControllerI from "../interfaces/LikeController";
 export default class LikeController implements LikeControllerI {
   app: Express;
   likeDao: LikeDao;
+  tuitDao: TuitDao;
 
-  constructor(app: Express, likeDao: LikeDao) { 
+  constructor(app: Express, likeDao: LikeDao, tuitDao: TuitDao) { 
       this.app = app;
       this.likeDao = likeDao;
+      this.tuitDao = tuitDao;
       this.app.post('/api/users/:uid/likes/:tid', this.userLikesTuit);
       this.app.delete('/api/users/:uid/likes/:tid', this.userUnlikesTuit);
       this.app.get('/api/users/:tid/likes', this.findAllUsersWhoLikedTuit);
@@ -83,4 +87,29 @@ findAllTuitsLikedByUser = async(req: Request, res: Response) => {
     .then(likes=>res.json(likes)
     );
 }
+
+userTogglesTuitLikes = async (req: Request, res: Response) => {
+  const uid = req.params.uid;
+  const tid = req.params.tid;
+  // @ts-ignore
+  const profile = req.session['profile'];
+  const userId = uid === "me" && profile ?
+        profile._id : uid;
+  try {
+    const userAlreadyLikedTuit = await this.likeDao
+        .userLikesTuit(userId, tid);
+    const howManyLikedTuit = await this.likeDao
+        .countHowManyLikedTuit(tid);
+    let tuit = await this.tuitDao.findTuitById(tid);
+    if (!userAlreadyLikedTuit) {
+      await this.likeDao.userUnlikesTuit(userId, tid);
+    } else {
+      await this.likeDao.userLikesTuit(userId, tid);
+    };
+    res.sendStatus(200);
+  } catch (e) {
+    res.sendStatus(404);
+  }
+}
+
 }

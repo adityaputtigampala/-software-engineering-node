@@ -59,6 +59,8 @@ public findAllTuitsLikedByUser =async (
     .exec();
     return liked;
 }
-
+public countHowManyLikedTuit =
+  async (tid: string) =>
+    LikeModel.count({tuit: tid});
 
 }
