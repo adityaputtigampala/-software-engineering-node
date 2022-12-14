@@ -82,11 +82,23 @@ findAllUsersWhoLikedTuit = async(req: Request, res: Response) => {
     * @param req Represents request from client, including the path parameters user id
     * @param res Represents response to client, including a created like object
     */
-findAllTuitsLikedByUser = async(req: Request, res: Response) => {
-    this.likeDao.findAllTuitsLikedByUser(req.params.uid)
-    .then(likes=>res.json(likes)
-    );
+findAllTuitsLikedByUser = (req: Request, res: Response) => {
+  const uid = req.params.uid;
+  // @ts-ignore
+  const profile = req.session['profile'];
+  const userId = uid === "me" && profile ?
+    profile._id : uid;
+
+  this.likeDao.findAllTuitsLikedByUser(userId)
+    .then(likes => {
+      const likesNonNullTuits =
+        likes.filter(like => like.tuit);
+      const tuitsFromLikes =
+        likesNonNullTuits.map(like => like.tuit);
+      res.json(tuitsFromLikes);
+    });
 }
+
 
 userTogglesTuitLikes = async (req: Request, res: Response) => {
   const uid = req.params.uid;

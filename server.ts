@@ -16,6 +16,7 @@ import MessageController from './src/controllers/MessageController';
 import MessageDao from './src/daos/MessageDao';
 import LikeController from './src/controllers/LikeController';
 import LikeDao from './src/daos/LikeDao';
+import AuthenticationController from './src/controllers/auth-controller';
 
 //import db from './src/db/db';
 const cors = require('cors')
@@ -74,4 +75,5 @@ const tuitController = new TuitController(app, new TuitDao());
 const followController = new FollowController(app, new FollowDao());
 const bookmarkController = new BookmarkController(app, new BookmarkDao());
 const messageController = new MessageController(app, new MessageDao());
-const likeController = new LikeController(app, new LikeDao());
+const likeController = new LikeController(app, new LikeDao(), new TuitDao);
+AuthenticationController(app);
